@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  drill:
+    image: apache/drill
+    container_name: drill
+    restart: unless-stopped
+    ports:
+      - "8047:8047"
+      - "31010:31010"
+    volumes:
+      - drill-data:/data
+      - ./drill-override.conf:/opt/drill/conf/drill-override.conf
+      # - ./storage-plugins-override.conf:/opt/drill/conf/storage-plugins-override.conf
+    
+      # DATA:
+      - /data-raid/log-dumps:/nano-data
+    stdin_open: true
+    tty: true
+
+volumes:
+  drill-data:
