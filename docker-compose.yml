@@ -12,11 +12,16 @@ services:
       - drill-data:/data
       - ./drill-override.conf:/opt/drill/conf/drill-override.conf
       # - ./storage-plugins-override.conf:/opt/drill/conf/storage-plugins-override.conf
-    
+
       # DATA:
       - /data-raid/log-dumps:/nano-data
     stdin_open: true
     tty: true
+    environment:
+      - DRILLBIT_MAX_PROC_MEM=90%
+      - DRILL_HEAP=64G
+      - DRILL_MAX_DIRECT_MEMORY=128G
+      - DRILLBIT_CODE_CACHE_SIZE=2048M
 
 volumes:
   drill-data:
